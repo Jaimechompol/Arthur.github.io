@@ -673,6 +673,170 @@ const allExercises = [
             <div class="operation-text">disp(B);</div>
         </div>`
     },
+    
+    // Estructuras de control y programación en Scilab
+    {
+        id: 501,
+        title: "Bucle for",
+        description: "Escribe un bucle for en Scilab que imprima los números del 1 al 5.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres imprimir los números del 1 al 5 usando un bucle</div>
+            <div class="operation-text">Código: ?</div>
+        </div>`,
+        correctAnswer: "for i = 1:5\n    disp(i)\nend",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("fori=1:5") && 
+                   normalized.includes("disp(i)") && 
+                   normalized.includes("end");
+        },
+        hint: "Usa la estructura 'for variable = inicio:fin ... end' y el comando disp() para mostrar cada valor.",
+        explanation: "Para crear un bucle for en Scilab que imprima los números del 1 al 5, se utiliza la siguiente estructura:\n\nfor i = 1:5\n    disp(i)\nend\n\nDonde:\n- 'for' inicia el bucle\n- 'i = 1:5' define la variable de iteración i que tomará valores de 1 a 5\n- 'disp(i)' muestra el valor actual de i en cada iteración\n- 'end' marca el final del bucle\n\nEste código ejecutará el comando disp(i) cinco veces, con i tomando los valores 1, 2, 3, 4 y 5 sucesivamente.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">for i = 1:5</div>
+            <div class="operation-text">    disp(i)</div>
+            <div class="operation-text">end</div>
+            <div class="operation-text">Resultado:</div>
+            <div class="operation-text">1</div>
+            <div class="operation-text">2</div>
+            <div class="operation-text">3</div>
+            <div class="operation-text">4</div>
+            <div class="operation-text">5</div>
+        </div>`
+    },
+    {
+        id: 502,
+        title: "Condicional if-else",
+        description: "Escribe una estructura condicional if-else en Scilab que verifique si un número 'x' es positivo, negativo o cero.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Variable: x</div>
+            <div class="operation-text">Quieres mostrar si x es positivo, negativo o cero</div>
+            <div class="operation-text">Código: ?</div>
+        </div>`,
+        correctAnswer: "if x > 0 then\n    disp('Positivo')\nelseif x < 0 then\n    disp('Negativo')\nelse\n    disp('Cero')\nend",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("ifx>0then") && 
+                   normalized.includes("disp('Positivo')") && 
+                   (normalized.includes("elseifx<0then") || normalized.includes("elseif(x<0)then")) && 
+                   normalized.includes("disp('Negativo')") && 
+                   normalized.includes("else") && 
+                   normalized.includes("disp('Cero')") && 
+                   normalized.includes("end");
+        },
+        hint: "Usa la estructura 'if condición then ... elseif otra_condición then ... else ... end'.",
+        explanation: "Para crear una estructura condicional if-else en Scilab que verifique si un número 'x' es positivo, negativo o cero, se utiliza la siguiente estructura:\n\nif x > 0 then\n    disp('Positivo')\nelseif x < 0 then\n    disp('Negativo')\nelse\n    disp('Cero')\nend\n\nDonde:\n- 'if x > 0 then' verifica si x es mayor que 0\n- 'elseif x < 0 then' verifica si x es menor que 0 (solo se ejecuta si la primera condición es falsa)\n- 'else' se ejecuta si ninguna de las condiciones anteriores es verdadera (es decir, si x es 0)\n- 'end' marca el final de la estructura condicional\n\nEste código mostrará 'Positivo', 'Negativo' o 'Cero' dependiendo del valor de x.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">if x > 0 then</div>
+            <div class="operation-text">    disp('Positivo')</div>
+            <div class="operation-text">elseif x < 0 then</div>
+            <div class="operation-text">    disp('Negativo')</div>
+            <div class="operation-text">else</div>
+            <div class="operation-text">    disp('Cero')</div>
+            <div class="operation-text">end</div>
+        </div>`
+    },
+    {
+        id: 503,
+        title: "Bucle while",
+        description: "Escribe un bucle while en Scilab que calcule la suma de los números del 1 al 10.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres calcular la suma de los números del 1 al 10 usando un bucle while</div>
+            <div class="operation-text">Código: ?</div>
+        </div>`,
+        correctAnswer: "suma = 0;\ni = 1;\nwhile i <= 10\n    suma = suma + i;\n    i = i + 1;\nend\ndisp(suma);",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("suma=0") && 
+                   normalized.includes("i=1") && 
+                   normalized.includes("whilei<=10") && 
+                   normalized.includes("suma=suma+i") && 
+                   normalized.includes("i=i+1") && 
+                   normalized.includes("end") && 
+                   normalized.includes("disp(suma)");
+        },
+        hint: "Inicializa variables para la suma y el contador, usa un bucle while con una condición de terminación, actualiza la suma y el contador en cada iteración.",
+        explanation: "Para crear un bucle while en Scilab que calcule la suma de los números del 1 al 10, se utiliza la siguiente estructura:\n\nsuma = 0; // Inicializa la variable para almacenar la suma\ni = 1;    // Inicializa el contador\nwhile i <= 10\n    suma = suma + i; // Agrega el valor actual de i a la suma\n    i = i + 1;      // Incrementa el contador\nend\ndisp(suma); // Muestra el resultado final\n\nDonde:\n- 'while i <= 10' establece la condición para continuar el bucle (mientras i sea menor o igual a 10)\n- El bucle se ejecuta repetidamente hasta que la condición se vuelve falsa\n- Dentro del bucle, se actualiza la suma y se incrementa el contador\n- Después del bucle, se muestra el resultado final (55)\n\nA diferencia del bucle for, en el bucle while debemos incrementar manualmente el contador.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">suma = 0;</div>
+            <div class="operation-text">i = 1;</div>
+            <div class="operation-text">while i <= 10</div>
+            <div class="operation-text">    suma = suma + i;</div>
+            <div class="operation-text">    i = i + 1;</div>
+            <div class="operation-text">end</div>
+            <div class="operation-text">disp(suma);</div>
+            <div class="operation-text">Resultado: 55</div>
+        </div>`
+    },
+    {
+        id: 504,
+        title: "Definición de función",
+        description: "Escribe una función en Scilab llamada 'cuadrado' que reciba un número como parámetro y devuelva su cuadrado.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres crear una función que calcule el cuadrado de un número</div>
+            <div class="operation-text">Código: ?</div>
+        </div>`,
+        correctAnswer: "function y = cuadrado(x)\n    y = x^2;\nendfunction",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return (normalized.includes("functiony=cuadrado(x)") || normalized.includes("functionresult=cuadrado(x)")) && 
+                   (normalized.includes("y=x^2") || normalized.includes("y=x*x") || normalized.includes("result=x^2") || normalized.includes("result=x*x")) && 
+                   normalized.includes("endfunction");
+        },
+        hint: "Usa la estructura 'function resultado = nombre_funcion(parametros) ... endfunction'.",
+        explanation: "Para definir una función en Scilab que calcule el cuadrado de un número, se utiliza la siguiente estructura:\n\nfunction y = cuadrado(x)\n    y = x^2;\nendfunction\n\nDonde:\n- 'function y = cuadrado(x)' define una función llamada 'cuadrado' que toma un parámetro 'x' y devuelve un resultado 'y'\n- 'y = x^2;' calcula el cuadrado de x y lo asigna a la variable de salida y\n- 'endfunction' marca el final de la definición de la función\n\nDespués de definir esta función, puedes usarla como cualquier otra función de Scilab:\n\nresultado = cuadrado(5); // Devuelve 25\ndisp(cuadrado(3));      // Muestra 9\n\nTambién puedes guardar la función en un archivo .sci o .sce para reutilizarla en diferentes sesiones.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">function y = cuadrado(x)</div>
+            <div class="operation-text">    y = x^2;</div>
+            <div class="operation-text">endfunction</div>
+            <div class="operation-text">// Ejemplo de uso:</div>
+            <div class="operation-text">disp(cuadrado(4));</div>
+            <div class="operation-text">Resultado: 16</div>
+        </div>`
+    },
+    {
+        id: 505,
+        title: "Sentencia select-case",
+        description: "Escribe una estructura select-case en Scilab que muestre un mensaje según el día de la semana (1-7).",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Variable: dia (un número del 1 al 7)</div>
+            <div class="operation-text">Quieres mostrar el nombre del día correspondiente</div>
+            <div class="operation-text">Código: ?</div>
+        </div>`,
+        correctAnswer: "select dia\ncase 1 then\n    disp('Lunes')\ncase 2 then\n    disp('Martes')\ncase 3 then\n    disp('Miércoles')\ncase 4 then\n    disp('Jueves')\ncase 5 then\n    disp('Viernes')\ncase 6 then\n    disp('Sábado')\ncase 7 then\n    disp('Domingo')\nelse\n    disp('Día inválido')\nend",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("selectdia") && 
+                   normalized.includes("case1then") && 
+                   normalized.includes("disp('Lunes')") && 
+                   normalized.includes("case7then") && 
+                   normalized.includes("disp('Domingo')") && 
+                   normalized.includes("else") && 
+                   normalized.includes("end");
+        },
+        hint: "Usa la estructura 'select variable case valor1 then ... case valor2 then ... else ... end'.",
+        explanation: "Para crear una estructura select-case en Scilab que muestre un mensaje según el día de la semana, se utiliza la siguiente estructura:\n\nselect dia\ncase 1 then\n    disp('Lunes')\ncase 2 then\n    disp('Martes')\ncase 3 then\n    disp('Miércoles')\ncase 4 then\n    disp('Jueves')\ncase 5 then\n    disp('Viernes')\ncase 6 then\n    disp('Sábado')\ncase 7 then\n    disp('Domingo')\nelse\n    disp('Día inválido')\nend\n\nDonde:\n- 'select dia' indica la variable que se va a evaluar\n- 'case N then' define qué hacer cuando dia es igual a N\n- 'else' define qué hacer si dia no coincide con ninguno de los casos anteriores\n- 'end' marca el final de la estructura select-case\n\nEsta estructura es similar a switch-case en otros lenguajes de programación y es útil para manejar múltiples condiciones de manera más clara que con if-elseif-else.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">select dia</div>
+            <div class="operation-text">case 1 then</div>
+            <div class="operation-text">    disp('Lunes')</div>
+            <div class="operation-text">case 2 then</div>
+            <div class="operation-text">    disp('Martes')</div>
+            <div class="operation-text">case 3 then</div>
+            <div class="operation-text">    disp('Miércoles')</div>
+            <div class="operation-text">case 4 then</div>
+            <div class="operation-text">    disp('Jueves')</div>
+            <div class="operation-text">case 5 then</div>
+            <div class="operation-text">    disp('Viernes')</div>
+            <div class="operation-text">case 6 then</div>
+            <div class="operation-text">    disp('Sábado')</div>
+            <div class="operation-text">case 7 then</div>
+            <div class="operation-text">    disp('Domingo')</div>
+            <div class="operation-text">else</div>
+            <div class="operation-text">    disp('Día inválido')</div>
+            <div class="operation-text">end</div>
+        </div>`
+    },
     // Operaciones con vectores
     {
         id: 1,
@@ -1029,4 +1193,3 @@ function getRandomExercises(count) {
     const shuffledExercises = shuffleArray(allExercises);
     return shuffledExercises.slice(0, count);
 }
-
