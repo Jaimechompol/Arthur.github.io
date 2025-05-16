@@ -837,6 +837,141 @@ const allExercises = [
             <div class="operation-text">end</div>
         </div>`
     },
+    
+    // Funciones matemáticas en Scilab
+    {
+        id: 601,
+        title: "Funciones trigonométricas",
+        description: "Escribe el comando Scilab para calcular el seno, coseno y tangente de 45 grados.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Ángulo: 45 grados</div>
+            <div class="operation-text">Comandos para calcular seno, coseno y tangente: ?</div>
+        </div>`,
+        correctAnswer: "sin(45*%pi/180), cos(45*%pi/180), tan(45*%pi/180)",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("sin(45*%pi/180)") && 
+                   normalized.includes("cos(45*%pi/180)") && 
+                   (normalized.includes("tan(45*%pi/180)") || normalized.includes("tg(45*%pi/180)"));
+        },
+        hint: "Recuerda que las funciones trigonométricas en Scilab trabajan con radianes, no con grados. Usa %pi para convertir.",
+        explanation: "Para calcular funciones trigonométricas en Scilab, se utilizan las funciones sin(), cos() y tan(). Estas funciones esperan que el ángulo esté en radianes, no en grados.\n\nPara convertir de grados a radianes, se multiplica el ángulo en grados por %pi/180:\n\nsin(45*%pi/180) // Seno de 45 grados\ncos(45*%pi/180) // Coseno de 45 grados\ntan(45*%pi/180) // Tangente de 45 grados\n\nDonde %pi es la constante π en Scilab.\n\nLos resultados serán:\nsin(45°) = 0.7071...\ncos(45°) = 0.7071...\ntan(45°) = 1\n\nTambién puedes usar la función sind(), cosd() y tand() que trabajan directamente con ángulos en grados: sind(45), cosd(45), tand(45).",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">sin(45*%pi/180)</div>
+            <div class="operation-text">Resultado: 0.7071067811865475</div>
+            <div class="operation-text">cos(45*%pi/180)</div>
+            <div class="operation-text">Resultado: 0.7071067811865476</div>
+            <div class="operation-text">tan(45*%pi/180)</div>
+            <div class="operation-text">Resultado: 0.9999999999999999</div>
+        </div>`
+    },
+    {
+        id: 602,
+        title: "Funciones exponencial y logarítmica",
+        description: "Escribe los comandos Scilab para calcular e^2 y el logaritmo natural de 10.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Calcular e^2 y ln(10)</div>
+            <div class="operation-text">Comandos: ?</div>
+        </div>`,
+        correctAnswer: "exp(2), log(10)",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("exp(2)") && 
+                   normalized.includes("log(10)");
+        },
+        hint: "Usa exp() para la función exponencial y log() para el logaritmo natural.",
+        explanation: "Para calcular funciones exponenciales y logarítmicas en Scilab:\n\n1. La función exponencial e^x se calcula con exp(x):\n   exp(2) calcula e^2 = 7.3890...\n\n2. El logaritmo natural (base e) se calcula con log(x):\n   log(10) calcula ln(10) = 2.3025...\n\nSi necesitas calcular logaritmos en otras bases:\n- Para logaritmo base 10, usa log10(x)\n- Para logaritmo en cualquier base b, puedes usar log(x)/log(b)\n\nEstas funciones son fundamentales en muchos cálculos científicos y de ingeniería.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">exp(2)</div>
+            <div class="operation-text">Resultado: 7.3890560989306495</div>
+            <div class="operation-text">log(10)</div>
+            <div class="operation-text">Resultado: 2.302585092994046</div>
+        </div>`
+    },
+    {
+        id: 603,
+        title: "Funciones estadísticas",
+        description: "Escribe los comandos Scilab para calcular la media, mediana y desviación estándar del vector [4, 7, 2, 9, 3].",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Vector: [4, 7, 2, 9, 3]</div>
+            <div class="operation-text">Comandos para calcular media, mediana y desviación estándar: ?</div>
+        </div>`,
+        correctAnswer: "mean([4, 7, 2, 9, 3]), median([4, 7, 2, 9, 3]), stdev([4, 7, 2, 9, 3])",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("mean([4,7,2,9,3])") && 
+                   normalized.includes("median([4,7,2,9,3])") && 
+                   (normalized.includes("stdev([4,7,2,9,3])") || normalized.includes("st_deviation([4,7,2,9,3])") || normalized.includes("std([4,7,2,9,3])"));
+        },
+        hint: "Usa las funciones estadísticas mean(), median() y stdev() (o std()).",
+        explanation: "Para calcular estadísticas básicas en Scilab, se utilizan las siguientes funciones:\n\n1. Media (promedio): mean(vector)\n   mean([4, 7, 2, 9, 3]) = 5\n\n2. Mediana (valor central): median(vector)\n   median([4, 7, 2, 9, 3]) = 4\n\n3. Desviación estándar: stdev(vector) o std(vector)\n   stdev([4, 7, 2, 9, 3]) = 2.9154...\n\nEstas funciones son parte del paquete estadístico de Scilab y son muy útiles para el análisis de datos. La desviación estándar mide la dispersión de los valores respecto a la media.\n\nNota: En algunas versiones de Scilab, puedes usar std() en lugar de stdev().",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">mean([4, 7, 2, 9, 3])</div>
+            <div class="operation-text">Resultado: 5</div>
+            <div class="operation-text">median([4, 7, 2, 9, 3])</div>
+            <div class="operation-text">Resultado: 4</div>
+            <div class="operation-text">stdev([4, 7, 2, 9, 3])</div>
+            <div class="operation-text">Resultado: 2.9154759474226504</div>
+        </div>`
+    },
+    {
+        id: 604,
+        title: "Operaciones con archivos - Guardar",
+        description: "Escribe el comando Scilab para guardar la matriz A = [1, 2; 3, 4] en un archivo llamado 'datos.dat'.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Matriz A = [1, 2; 3, 4]</div>
+            <div class="operation-text">Archivo: 'datos.dat'</div>
+            <div class="operation-text">Comando para guardar la matriz: ?</div>
+        </div>`,
+        correctAnswer: "save('datos.dat', 'A')",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("save('datos.dat','A')") || 
+                   normalized.includes('save("datos.dat","A")') || 
+                   normalized.includes("write('datos.dat',A)") || 
+                   normalized.includes('write("datos.dat",A)');
+        },
+        hint: "Usa la función save() con el nombre del archivo y el nombre de la variable a guardar.",
+        explanation: "Para guardar variables en un archivo en Scilab, se utiliza la función save(). La sintaxis básica es:\n\nsave('nombre_archivo', 'lista_variables')\n\nEn este caso, para guardar la matriz A en el archivo 'datos.dat':\n\nA = [1, 2; 3, 4]; // Definir la matriz\nsave('datos.dat', 'A'); // Guardar la matriz en el archivo\n\nEsto creará un archivo binario 'datos.dat' que contiene la matriz A. Si quieres guardar en formato de texto, puedes usar:\n\nwrite('datos.dat', A); // Guarda en formato de texto\n\nEl archivo guardado puede ser cargado posteriormente usando la función load().",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">A = [1, 2; 3, 4];</div>
+            <div class="operation-text">save('datos.dat', 'A');</div>
+            <div class="operation-text">Resultado: Se crea el archivo 'datos.dat' con la matriz A</div>
+        </div>`
+    },
+    {
+        id: 605,
+        title: "Operaciones con archivos - Cargar",
+        description: "Escribe el comando Scilab para cargar los datos del archivo 'datos.dat'.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Archivo: 'datos.dat'</div>
+            <div class="operation-text">Comando para cargar los datos: ?</div>
+        </div>`,
+        correctAnswer: "load('datos.dat')",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized.includes("load('datos.dat')") || 
+                   normalized.includes('load("datos.dat")') || 
+                   normalized.includes("read('datos.dat')") || 
+                   normalized.includes('read("datos.dat")');
+        },
+        hint: "Usa la función load() con el nombre del archivo a cargar.",
+        explanation: "Para cargar datos desde un archivo en Scilab, se utiliza la función load(). La sintaxis básica es:\n\nload('nombre_archivo')\n\nEn este caso, para cargar los datos del archivo 'datos.dat':\n\nload('datos.dat');\n\nEsto cargará todas las variables guardadas en el archivo 'datos.dat' al espacio de trabajo actual. Si el archivo contiene una matriz llamada 'A', después de ejecutar este comando, la matriz 'A' estará disponible para su uso.\n\nSi el archivo es de texto y fue guardado con write(), puedes usar:\n\nA = read('datos.dat', -1, -1); // Lee todo el contenido\n\nDonde los parámetros -1, -1 indican que se debe leer todo el contenido del archivo.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">load('datos.dat');</div>
+            <div class="operation-text">Resultado: Las variables guardadas en 'datos.dat' se cargan en el espacio de trabajo</div>
+            <div class="operation-text">A</div>
+            <div class="operation-text">Resultado:</div>
+            <div class="matrix-visual">
+                <div class="matrix-bracket">[</div>
+                <div class="matrix-content">
+                    <div class="matrix-row">1 2</div>
+                    <div class="matrix-row">3 4</div>
+                </div>
+                <div class="matrix-bracket">]</div>
+            </div>
+        </div>`
+    },
     // Operaciones con vectores
     {
         id: 1,
