@@ -564,6 +564,115 @@ const allExercises = [
             </div>
         </div>`
     },
+    
+    // Comandos básicos de Scilab
+    {
+        id: 401,
+        title: "Comando help",
+        description: "Escribe el comando Scilab para obtener ayuda sobre la función 'plot'.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres obtener información sobre cómo usar la función 'plot'</div>
+            <div class="operation-text">Comando: ?</div>
+        </div>`,
+        correctAnswer: "help plot",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized === "helpplot" || normalized === "?plot";
+        },
+        hint: "Usa el comando help seguido del nombre de la función.",
+        explanation: "El comando 'help' en Scilab muestra la documentación de una función específica. La sintaxis es:\n\nhelp nombre_funcion\n\nEn este caso, para obtener ayuda sobre la función 'plot', el comando es:\n\nhelp plot\n\nTambién puedes usar el atajo '?' seguido del nombre de la función: ?plot",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">help plot</div>
+            <div class="operation-text">Resultado: Se muestra la documentación completa de la función plot, incluyendo su sintaxis, parámetros y ejemplos de uso.</div>
+        </div>`
+    },
+    {
+        id: 402,
+        title: "Comando clear",
+        description: "Escribe el comando Scilab para limpiar todas las variables del espacio de trabajo.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres eliminar todas las variables definidas en la sesión actual</div>
+            <div class="operation-text">Comando: ?</div>
+        </div>`,
+        correctAnswer: "clear all",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized === "clearall" || normalized === "clear";
+        },
+        hint: "Usa el comando clear con un parámetro que indique que quieres limpiar todo.",
+        explanation: "El comando 'clear all' en Scilab elimina todas las variables, funciones y otros objetos definidos por el usuario en la sesión actual. Esto es útil para comenzar con un espacio de trabajo limpio.\n\nTambién puedes usar simplemente 'clear' sin argumentos, que tiene el mismo efecto que 'clear all' en versiones recientes de Scilab.\n\nSi quieres eliminar solo una variable específica, puedes usar 'clear nombre_variable'.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">clear all</div>
+            <div class="operation-text">Resultado: Todas las variables definidas previamente son eliminadas del espacio de trabajo.</div>
+        </div>`
+    },
+    {
+        id: 403,
+        title: "Comando who",
+        description: "Escribe el comando Scilab para mostrar todas las variables definidas en el espacio de trabajo actual.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres ver qué variables están definidas en la sesión actual</div>
+            <div class="operation-text">Comando: ?</div>
+        </div>`,
+        correctAnswer: "who",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized === "who" || normalized === "whos";
+        },
+        hint: "Usa el comando que muestra la lista de variables (similar a 'who' en MATLAB).",
+        explanation: "El comando 'who' en Scilab muestra una lista de todas las variables definidas en el espacio de trabajo actual. Esto es útil para ver qué variables están disponibles para su uso.\n\nSi quieres información más detallada sobre las variables, incluyendo su tipo y tamaño, puedes usar el comando 'whos'.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">who</div>
+            <div class="operation-text">Resultado:</div>
+            <div class="operation-text">Variables actualmente definidas:</div>
+            <div class="operation-text">x, y, A, B, resultado</div>
+        </div>`
+    },
+    {
+        id: 404,
+        title: "Comando clc",
+        description: "Escribe el comando Scilab para limpiar la ventana de la consola.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres limpiar todo el texto mostrado en la consola de Scilab</div>
+            <div class="operation-text">Comando: ?</div>
+        </div>`,
+        correctAnswer: "clc",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized === "clc";
+        },
+        hint: "Usa el comando de tres letras que limpia la consola (similar a 'cls' en algunos sistemas).",
+        explanation: "El comando 'clc' (clear console) en Scilab limpia la ventana de la consola, eliminando todo el texto mostrado anteriormente. Esto es útil para tener una vista limpia cuando se está trabajando en un script o realizando cálculos interactivos.\n\nEste comando solo afecta a la visualización de la consola y no modifica las variables o el estado del programa.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">clc</div>
+            <div class="operation-text">Resultado: La ventana de la consola se limpia, eliminando todo el texto mostrado anteriormente.</div>
+        </div>`
+    },
+    {
+        id: 405,
+        title: "Comando type",
+        description: "Escribe el comando Scilab para mostrar el contenido de un archivo de script llamado 'calculo.sce'.",
+        visual: `<div class="matrix-operation">
+            <div class="operation-text">Quieres ver el código fuente contenido en el archivo 'calculo.sce'</div>
+            <div class="operation-text">Comando: ?</div>
+        </div>`,
+        correctAnswer: "type('calculo.sce')",
+        validateAnswer: function(userAnswer) {
+            const normalized = userAnswer.replace(/\s+/g, '');
+            return normalized === "type('calculo.sce')" || normalized === "type(calculo.sce)" || normalized === "type calculo.sce";
+        },
+        hint: "Usa el comando que muestra el contenido de un archivo (similar a 'type' en sistemas Windows o 'cat' en Unix).",
+        explanation: "El comando 'type' en Scilab muestra el contenido de un archivo de script o función. La sintaxis es:\n\ntype('nombre_archivo')\n\nEn este caso, para mostrar el contenido del archivo 'calculo.sce', el comando es:\n\ntype('calculo.sce')\n\nEste comando es útil para revisar rápidamente el código de un script sin tener que abrirlo en un editor de texto.",
+        solutionVisual: `<div class="matrix-operation">
+            <div class="operation-text">type('calculo.sce')</div>
+            <div class="operation-text">Resultado:</div>
+            <div class="operation-text">// Archivo: calculo.sce</div>
+            <div class="operation-text">// Cálculo de la raíz cuadrada de una matriz</div>
+            <div class="operation-text">A = [4, 9; 16, 25];</div>
+            <div class="operation-text">B = sqrt(A);</div>
+            <div class="operation-text">disp(B);</div>
+        </div>`
+    },
     // Operaciones con vectores
     {
         id: 1,
@@ -920,3 +1029,4 @@ function getRandomExercises(count) {
     const shuffledExercises = shuffleArray(allExercises);
     return shuffledExercises.slice(0, count);
 }
+
