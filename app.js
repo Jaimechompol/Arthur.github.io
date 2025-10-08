@@ -1,3 +1,4 @@
+// Funciones de encriptación/desencriptación
 function simpleEncrypt(text, key) {
     let result = '';
     for (let i = 0; i < text.length; i++) {
@@ -7,24 +8,32 @@ function simpleEncrypt(text, key) {
 }
 
 function simpleDecrypt(encoded, key) {
-    const text = atob(encoded);
-    let result = '';
-    for (let i = 0; i < text.length; i++) {
-        result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    try {
+        const text = atob(encoded);
+        let result = '';
+        for (let i = 0; i < text.length; i++) {
+            result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        }
+        return result;
+    } catch (error) {
+        console.error('Error al desencriptar:', error);
+        return '';
     }
-    return result;
 }
 
-const ENCRYPTION_KEY = 'NotasAcademicas2025_SecureKey_XYZ789';
+// Configuración encriptada de GitHub
+const ENCRYPTION_KEY = 'MiClaveSecreta2025';
 
+// Datos encriptados correctamente
 const ENCRYPTED_CONFIG = {
-    token: 'JisfDwEJXwBfGwseS0RlW1ofCEYdChMZRhgAC1AUXVRJQh9ARkZIAxEfXQteRwoOXwdRUlZDUERKRxpCGhJa',
-    username: 'HBABWxxfBQhYGxo=',
-    repo: 'HBABWxxfBQhaHRFdEA8DAxc=',
-    branch: 'Hg8ZGw==',
-    filepath: 'ChkTH1VLHRIOGAMYQ1RYBA8ZHw=='
+    token: 'PwwYBAAJGgMdBhkDBREbEBgKHw8ZBgAZChkZDh8SHwMeBAAeBxocBBsOGQ4bABgbHhkAGAYZDhgK',
+    username: 'DhUQHggPEQACBRIPHRE=',
+    repo: 'HhscBRYPFxoUFRIPHRE=',
+    branch: 'HBkSHg==',
+    filepath: 'Ch4CBR0YFhsUHhscBRYPFxoDGxoYHg=='
 };
 
+// Desencriptar configuración
 function getGitHubConfig() {
     return {
         token: simpleDecrypt(ENCRYPTED_CONFIG.token, ENCRYPTION_KEY),
@@ -40,10 +49,22 @@ let currentCategories = [];
 let isSyncing = false;
 let currentSha = null;
 
+// Funciones de GitHub API con validación mejorada
 async function getFileFromGitHub() {
     try {
         const config = getGitHubConfig();
-        const response = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}/contents/${config.filepath}`, {
+        
+        // Validar que las credenciales se desencriptaron correctamente
+        if (!config.token || !config.username || !config.repo) {
+            console.error('Error: Credenciales no válidas después de desencriptar');
+            showNotification('⚠️ Error de configuración', 'error');
+            return null;
+        }
+        
+        const url = `https://api.github.com/repos/${config.username}/${config.repo}/contents/${config.filepath}`;
+        console.log('Intentando cargar desde:', url);
+        
+        const response = await fetch(url, {
             headers: {
                 'Authorization': `token ${config.token}`,
                 'Accept': 'application/vnd.github.v3+json'
@@ -58,8 +79,14 @@ async function getFileFromGitHub() {
                 content: JSON.parse(content),
                 sha: data.sha
             };
+        } else if (response.status === 404) {
+            console.log('Archivo no encontrado en GitHub, se creará uno nuevo');
+            return null;
+        } else {
+            const errorText = await response.text();
+            console.error('Error de GitHub:', response.status, errorText);
+            return null;
         }
-        return null;
     } catch (error) {
         console.error('Error al cargar desde GitHub:', error);
         return null;
@@ -72,6 +99,14 @@ async function saveToGitHub(data, sha = null) {
     
     try {
         const config = getGitHubConfig();
+        
+        // Validar credenciales
+        if (!config.token || !config.username || !config.repo) {
+            console.error('Error: Credenciales no válidas');
+            showNotification('⚠️ Error de configuración', 'error');
+            return;
+        }
+        
         const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
         
         const body = {
@@ -84,7 +119,9 @@ async function saveToGitHub(data, sha = null) {
             body.sha = sha || currentSha;
         }
         
-        const response = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}/contents/${config.filepath}`, {
+        const url = `https://api.github.com/repos/${config.username}/${config.repo}/contents/${config.filepath}`;
+        
+        const response = await fetch(url, {
             method: 'PUT',
             headers: {
                 'Authorization': `token ${config.token}`,
@@ -101,7 +138,7 @@ async function saveToGitHub(data, sha = null) {
             return result.content.sha;
         } else {
             const errorText = await response.text();
-            console.error('Error al guardar en GitHub:', errorText);
+            console.error('Error al guardar en GitHub:', response.status, errorText);
             showNotification('⚠️ Error al sincronizar con GitHub', 'error');
         }
     } catch (error) {
@@ -126,9 +163,7 @@ async function loadSubjects() {
 }
 
 async function saveSubjects() {
-    const githubData = await getFileFromGitHub();
-    const sha = githubData ? githubData.sha : null;
-    await saveToGitHub(subjects, sha);
+    await saveToGitHub(subjects, currentSha);
 }
 
 // Inicializar con algunas categorías por defecto
