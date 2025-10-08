@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Notas - Sistema Académico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="sync-status">
+                <div class="sync-indicator"></div>
+                <span>GitHub Sync</span>
+            </div>
+            <div class="header-content">
+                <h1>🎓 Sistema de Calificaciones</h1>
+                <p>Gestiona tus asignaturas con categorías personalizadas | Escala sobre 20 puntos</p>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('subjects')">📊 Mis Asignaturas</button>
+                <button class="tab" onclick="switchTab('add-subject')">➕ Nueva Asignatura</button>
+            </div>
+            
+            <!-- Tab: Mis Asignaturas -->
+            <div id="subjects" class="tab-content active">
+                <div id="subjects-list">
+                    <div class="empty-state">
+                        <h3>Sin asignaturas registradas</h3>
+                        <p>Comienza creando tu primera asignatura con categorías personalizadas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab: Nueva Asignatura -->
+            <div id="add-subject" class="tab-content">
+                <h2 style="margin-bottom: 25px; font-size: 1.8rem; font-weight: 700; color: #2d3748;">Crear Nueva Asignatura</h2>
+                <form id="subject-form">
+                    <div class="form-group">
+                        <label for="subject-name">📌 Nombre de la Asignatura</label>
+                        <input type="text" id="subject-name" required placeholder="Ej: Matemáticas, Historia, Química, Programación...">
+                    </div>
+                    
+                    <div class="categories-section">
+                        <h3>Categorías de Evaluación</h3>
+                        <div id="categories-list">
+                            <!-- Las categorías aparecerán aquí -->
+                        </div>
+                        
+                        <div class="add-category-form">
+                            <input type="text" id="category-name" placeholder="Nombre de la categoría (ej: Exámenes, Tareas, Participación)">
+                            <input type="number" id="category-points" placeholder="Puntos" min="1" max="100">
+                            <button type="button" class="btn btn-success" onclick="addCategory()">➕ Agregar</button>
+                        </div>
+                        
+                        <div class="total-points" id="total-points">
+                            Total: 0 puntos
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">✅ Crear Asignatura</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   <script src="app.js"></script>
+</body>
+</html>
